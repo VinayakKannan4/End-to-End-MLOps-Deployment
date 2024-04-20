@@ -9,6 +9,9 @@ from dataclasses import dataclass
 from source.exception import CustomException
 from source.logs import logging
 
+from source.modules.data_transformation import DataTransformation
+from source.modules.data_transformation import DataTransformationConfig
+
 ## Creating class to save raw, train and test data
 @dataclass
 class DataIngestionConfig:
@@ -50,5 +53,8 @@ class DataIngestion:
         
 if __name__ == "__main__":
     obj = DataIngestion()
-    obj.initiate_data_ingestion()
+    train_data,test_data=obj.initiate_data_ingestion()
+
+    data_transformation=DataTransformation()
+    train_arr,test_arr,_=data_transformation.initiate_data_transformation(train_data,test_data)
     
